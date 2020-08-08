@@ -1,11 +1,6 @@
 {
   "contacts": [
     {
-      "name": "Rosie Simpson",
-      "number": "245-55-66",
-      "id": 1
-    },
-    {
       "name": "Anry Black",
       "number": "678-98-78",
       "id": 2
@@ -19,6 +14,11 @@
       "name": "Enrique Iglesias",
       "number": "687-90-64",
       "id": 4
+    },
+    {
+      "name": "Rosie Simpson",
+      "number": "245-55-66",
+      "id": 5
     }
   ]
 }

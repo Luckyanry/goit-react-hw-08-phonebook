@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { CSSTransition } from "react-transition-group";
-import { getContacts } from "../../redux/contacts/contactOperations";
-import { itemsSelector } from "../../redux/contacts/contactsSelectors";
+import { contactsOperations, contactsSelectors } from "../../redux/contacts";
 import ContactForm from "../ContactForm/ContactForm";
 import ContactList from "../ContactList/ContactList";
 import Filter from "../Filter/Filter";
-import "./App.css";
+import "./ContactsApp.css";
 
-class App extends Component {
+class ContactsApp extends Component {
   state = {
     animation: false,
   };
@@ -58,11 +57,11 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  contacts: itemsSelector(state),
+  contacts: contactsSelectors.itemsSelector(state),
 });
 
 const mapDispatchToProps = {
-  onGetContacts: getContacts,
+  onGetContacts: contactsOperations.getContacts,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactsApp);

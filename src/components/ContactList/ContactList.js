@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import PropTypes from "prop-types";
-import { getFilteredContact } from "../../redux/contacts/contactsSelectors";
+import { contactsSelectors } from "../../redux/contacts";
 import SingleContact from "../SingleContact/SingleContact";
 import "./ContactList.css";
 
@@ -19,7 +19,7 @@ const ContactList = ({ contacts }) => {
 };
 
 const mapStateToProps = (state) => ({
-  contacts: getFilteredContact(state),
+  contacts: contactsSelectors.getFilteredContact(state),
 });
 
 export default connect(mapStateToProps)(ContactList);

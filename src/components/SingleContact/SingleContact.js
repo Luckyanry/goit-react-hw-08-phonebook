@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { deleteContact } from "../../redux/contacts/contactOperations";
+import { contactsOperations, contactsSelectors } from "../../redux/contacts";
 import "./SingleContact.css";
-import { getContactById } from "../../redux/contacts/contactsSelectors";
 
 const SingleContact = ({ name, number, deleteContact }) => {
   return (
@@ -18,13 +17,13 @@ const SingleContact = ({ name, number, deleteContact }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const contact = getContactById(state, ownProps.id);
+  const contact = contactsSelectors.getContactById(state, ownProps.id);
 
   return { ...contact };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  deleteContact: () => dispatch(deleteContact(ownProps.id)),
+  deleteContact: () => dispatch(contactsOperations.deleteContact(ownProps.id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleContact);
