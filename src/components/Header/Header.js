@@ -1,10 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { AppBar, Toolbar } from "@material-ui/core";
-import "./Header.css";
+import { connect } from "react-redux";
+import { authSelectors } from "../../redux/auth";
 import UserMenu from "../UserMenu/UserMenu";
+import "./Header.css";
 
-const Header = () => {
+const Header = ({ isAuthenticated }) => {
   return (
     <div className="Header">
       <AppBar position="static">
@@ -31,9 +33,9 @@ const Header = () => {
           >
             Registration
           </NavLink>
-          {/* <NavLink to="/contacts"> */}
-          <UserMenu />
-          {/* </NavLink> */}
+
+          {isAuthenticated && <UserMenu />}
+
           {/* <NavLink
             to="/contacts"
             className="Navigation-link"
@@ -47,4 +49,8 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  isAuthenticated: authSelectors.isAuthenticated(state),
+});
+
+export default connect(mapStateToProps)(Header);

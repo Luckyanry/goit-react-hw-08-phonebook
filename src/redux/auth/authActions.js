@@ -12,25 +12,21 @@ const logoutRequest = createAction("@auth/logoutRequest");
 const logoutSeccess = createAction("@auth/logoutSeccess");
 const logoutError = createAction("@auth/logoutError");
 
-const getCurrentContactsRequest = createAction(
-  "@auth/getCurrentContactsRequest"
-);
-const getCurrentContactsSeccess = createAction(
-  "@auth/getCurrentContactsSeccess"
-);
-const getCurrentContactsError = createAction("@auth/getCurrentContactsError");
+const getCurrentUserRequest = createAction("@auth/getCurrentUserRequest");
+const getCurrentUserSeccess = createAction("@auth/getCurrentUserSeccess");
+const getCurrentUserError = createAction("@auth/getCurrentUserError");
 
 export default {
   registerRequest,
   loginRequest,
   logoutRequest,
-  getCurrentContactsRequest,
+  getCurrentUserRequest,
   registerError,
   loginError,
   logoutError,
-  getCurrentContactsError,
+  getCurrentUserError,
   registerSeccess,
   loginSeccess,
   logoutSeccess,
-  getCurrentContactsSeccess,
+  getCurrentUserSeccess,
 };

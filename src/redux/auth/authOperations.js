@@ -1,15 +1,21 @@
 import axios from "axios";
 import authActions from "./authActions";
 
-axios.defaults.baseURL = "http://localhost:2000";
+axios.defaults.baseURL = "https://goit-phonebook-api.herokuapp.com";
 
-const token = {};
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = "";
+  },
+};
 
 const register = (credentials) => async (dispatch) => {
   dispatch(authActions.registerRequest());
   try {
-    const result = await axios.post("/contacts/signup", credentials);
-    console.log("register result :>> ", result);
+    const result = await axios.post("/users/signup", credentials);
     token.set(result.data.token);
     dispatch(authActions.registerSeccess(result.data));
   } catch (error) {
@@ -20,7 +26,7 @@ const register = (credentials) => async (dispatch) => {
 const logIn = (credentials) => async (dispatch) => {
   dispatch(authActions.loginRequest());
   try {
-    const result = await axios.post("/contacts/login", credentials);
+    const result = await axios.post("/users/login", credentials);
     token.set(result.data.token);
     dispatch(authActions.loginSeccess(result.data));
   } catch (error) {
@@ -28,24 +34,34 @@ const logIn = (credentials) => async (dispatch) => {
   }
 };
 
-const logOut = (credentials) => async (dispatch) => {
+const logOut = () => async (dispatch) => {
   dispatch(authActions.logoutRequest());
   try {
-    const result = await axios.post("/contacts/logout");
-    dispatch(authActions.logoutSeccess(result.data));
+    await axios.post("/users/logout");
+    token.unset();
+    dispatch(authActions.logoutSeccess());
   } catch (error) {
     dispatch(authActions.logoutError(error));
   }
 };
 
-const getCurrentContact = (credentials) => async (dispatch) => {
-  dispatch(authActions.getCurrentContactsRequest());
+const getCurrentUser = () => async (dispatch, getState) => {
+  const {
+    auth: { token: persistedToken },
+  } = getState();
+
+  if (!persistedToken) {
+    return;
+  }
+
+  token.set(persistedToken);
+  dispatch(authActions.getCurrentUserRequest());
   try {
-    const result = await axios.get("/contacts");
-    dispatch(authActions.getCurrentContactsSeccess(result.data));
+    const result = await axios.get("/users/current");
+    dispatch(authActions.getCurrentUserSeccess(result.data));
   } catch (error) {
-    dispatch(authActions.getCurrentContactsError(error));
+    dispatch(authActions.getCurrentUserError(error));
   }
 };
 
-export default { register, logIn, logOut, getCurrentContact };
+export default { register, logIn, logOut, getCurrentUser };

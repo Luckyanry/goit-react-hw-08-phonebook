@@ -1,18 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import store from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./redux/store";
 import App from "./App";
-import ContactsApp from "./components/ContactsApp/ContactsApp";
 import "./index.css";
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <PersistGate loading={null} persistor={persistor}>
       <App />
-      <ContactsApp />
-    </BrowserRouter>
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

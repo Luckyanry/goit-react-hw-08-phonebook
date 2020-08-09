@@ -1,12 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 import { authSelectors, authOperations } from "../../redux/auth";
 import "./UserMenu.css";
 
-const UserMenu = ({
-  avatar = "https://i.ibb.co/Hg0JGFY/avatarko-anonim.jpg",
-  email,
-  onLogout,
-}) => {
+const UserMenu = ({ avatar, email, onLogout }) => {
   return (
     <div className="avatar-wrapper">
       <div className="account-avatar">
@@ -18,7 +15,7 @@ const UserMenu = ({
           height="44"
         />
       </div>
-      <span className="account-title">Welcome, {email}</span>
+      <span className="account-title">{email}</span>
       <button className="logout-btn" type="button" onClick={onLogout}>
         Logout
       </button>
@@ -26,4 +23,11 @@ const UserMenu = ({
   );
 };
 
-export default UserMenu;
+const mapStateToProps = (state) => ({
+  email: authSelectors.getUserEmail(state),
+  avatar: "https://i.ibb.co/Hg0JGFY/avatarko-anonim.jpg",
+});
+
+export default connect(mapStateToProps, { onLogout: authOperations.logOut })(
+  UserMenu
+);

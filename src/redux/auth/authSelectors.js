@@ -1,9 +1,5 @@
-import { createSelector } from "@reduxjs/toolkit";
+const isAuthenticated = (state) => state.auth.token;
 
-import React from "react";
+const getUserEmail = (state) => state.auth.user.email;
 
-const authSelectors = () => {
-  return <div></div>;
-};
-
-export default authSelectors;
+export default { isAuthenticated, getUserEmail };
