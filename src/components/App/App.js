@@ -2,9 +2,9 @@ import React, { Component, Suspense } from "react";
 import { connect } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
-import Header from "./components/Header/Header";
-import routes from "./routes";
-import { authOperations } from "./redux/auth";
+import Header from "../Header/Header";
+import routes from "../../routes";
+import { authOperations } from "../../redux/auth";
 import "./App.css";
 
 class App extends Component {

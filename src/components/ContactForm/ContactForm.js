@@ -117,7 +117,7 @@ ContactForm.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
-      id: PropTypes.number,
+      id: PropTypes.string,
       namber: PropTypes.string,
     })
   ).isRequired,

@@ -33,16 +33,14 @@ const Header = ({ isAuthenticated }) => {
           >
             Registration
           </NavLink>
-
-          {isAuthenticated && <UserMenu />}
-
-          {/* <NavLink
+          <NavLink
             to="/contacts"
             className="Navigation-link"
             activeClassName="Navigation-link-active"
           >
             Contacts
-          </NavLink> */}
+          </NavLink>
+          {isAuthenticated && <UserMenu />}
         </Toolbar>
       </AppBar>
     </div>
