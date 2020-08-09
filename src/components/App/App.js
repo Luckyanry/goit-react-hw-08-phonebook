@@ -2,10 +2,13 @@ import React, { Component, Suspense } from "react";
 import { connect } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
+import PrivateRoute from "../PrivateRoute";
+import PublicRoute from "../PublicRoute";
 import Header from "../Header/Header";
-import routes from "../../routes";
+// import routes from "../../routes";
 import { authOperations } from "../../redux/auth";
 import "./App.css";
+import { Home, Login, Register, Contacts } from "../../containers";
 
 class App extends Component {
   componentDidMount() {
@@ -17,10 +20,23 @@ class App extends Component {
         <Header />
         <Suspense fallback={<h1>Loading...</h1>}>
           <Switch>
-            {routes.map((route) => (
+            <PublicRoute path="/" exact component={Home} restricted={false} />
+            <PublicRoute
+              path="/login"
+              exact
+              component={Login}
+              restricted={true}
+            />
+            <PublicRoute
+              path="/register"
+              component={Register}
+              restricted={true}
+            />
+            <PrivateRoute path="/contacts" exact component={Contacts} />
+            {/* {routes.map((route) => (
               <Route key={route.path} {...route} />
-            ))}
-            <Redirect to="/" />
+            ))} */}
+            {/* <Redirect to="/" /> */}
           </Switch>
         </Suspense>
       </BrowserRouter>
@@ -38,3 +54,7 @@ export default connect(null, {
   <Route path="/register" component={Register} />
   <Redirect to="/" />
 </Switch> */
+
+// {
+//   routes.map((route) => <Route key={route.path} {...route} />);
+// }
