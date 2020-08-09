@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 import { contactsOperations, contactsSelectors } from "../../redux/contacts";
-import ContactForm from "../ContactForm/ContactForm";
-import ContactList from "../ContactList/ContactList";
-import Filter from "../Filter/Filter";
-import "./ContactsApp.css";
+import ContactForm from "../../components/ContactForm/ContactForm";
+import ContactList from "../../components/ContactList/ContactList";
+import Filter from "../../components/Filter/Filter";
+import "./Contacts.css";
 
-class ContactsApp extends Component {
+class Contacts extends Component {
   state = {
     animation: false,
   };
@@ -64,4 +64,4 @@ const mapDispatchToProps = {
   onGetContacts: contactsOperations.getContacts,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactsApp);
+export default connect(mapStateToProps, mapDispatchToProps)(Contacts);

@@ -1,7 +1,7 @@
 import axios from "axios";
 import contactsAction from "./contactsAction";
 
-axios.defaults.baseURL = "https://goit-phonebook-api.herokuapp.com";
+// axios.defaults.baseURL = "https://goit-phonebook-api.herokuapp.com";
 
 const token = {
   set(token) {

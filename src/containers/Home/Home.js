@@ -1,9 +1,12 @@
 import React from "react";
-// import ContactsApp from "../../components/ContactForm/ContactForm";
 import "./Home.css";
 
 const Home = () => {
-  return <div>{/* <ContactsApp /> */}</div>;
+  return (
+    <div>
+      <h1 className="Home-title">Welcome to phonebook application!</h1>
+    </div>
+  );
 };
 
 export default Home;
