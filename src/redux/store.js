@@ -1,10 +1,16 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from "redux-persist";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  REGISTER,
+  PAUSE,
+  PERSIST,
+  PURGE,
+} from "redux-persist";
 import contactReducer from "./contacts/contactsReducer";
 import authReducer, { authPersistConfig } from "./auth/authReducer";
-// import contactReducer, {
-//   contactsPersistConfig,
-// } from "./contacts/contactsReducer";
 
 export const store = configureStore({
   reducer: {
@@ -12,14 +18,11 @@ export const store = configureStore({
     auth: persistReducer(authPersistConfig, authReducer),
   },
   devTools: process.env.NODE_ENV !== "production",
+  middleware: getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, REGISTER, PAUSE, PERSIST, PURGE],
+    },
+  }),
 });
 
 export const persistor = persistStore(store);
-
-// export const store = configureStore({
-//   reducer: {
-//     contacts: persistReducer(contactsPersistConfig, contactReducer),
-//     auth: persistReducer(authPersistConfig, authReducer),
-//   },
-//   devTools: process.env.NODE_ENV !== "production",
-// });

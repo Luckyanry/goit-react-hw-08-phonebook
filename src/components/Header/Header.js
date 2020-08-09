@@ -19,28 +19,37 @@ const Header = ({ isAuthenticated }) => {
           >
             Home
           </NavLink>
-          <NavLink
-            to="/login"
-            className="Navigation-link"
-            activeClassName="Navigation-link-active"
-          >
-            Login
-          </NavLink>
-          <NavLink
-            to="/register"
-            className="Navigation-link"
-            activeClassName="Navigation-link-active"
-          >
-            Registration
-          </NavLink>
-          <NavLink
-            to="/contacts"
-            className="Navigation-link"
-            activeClassName="Navigation-link-active"
-          >
-            Contacts
-          </NavLink>
-          {isAuthenticated && <UserMenu />}
+
+          {isAuthenticated ? (
+            <>
+              <NavLink
+                to="/contacts"
+                className="Navigation-link"
+                activeClassName="Navigation-link-active"
+              >
+                Contacts
+              </NavLink>
+
+              <UserMenu />
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/login"
+                className="Navigation-link"
+                activeClassName="Navigation-link-active"
+              >
+                Login
+              </NavLink>
+              <NavLink
+                to="/register"
+                className="Navigation-link"
+                activeClassName="Navigation-link-active"
+              >
+                Registration
+              </NavLink>
+            </>
+          )}
         </Toolbar>
       </AppBar>
     </div>
@@ -52,3 +61,17 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(Header);
+
+// {
+//   routes.map((route) => (
+//     <NavLink
+//       key={route.label}
+//       to={route.path}
+//       exact={route.exact}
+//       className="Navigation-link"
+//       activeClassName="Navigation-link-active"
+//     >
+//       {route.label}
+//     </NavLink>
+//   ));
+// }
